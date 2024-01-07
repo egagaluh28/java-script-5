@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Gridjs Server Side Data</title>
+    <script src="https://unpkg.com/gridjs/dist/gridjs.production.min.js"></script>
+    <link
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="table-gridjs"></div>
+
+    <script>
+      new gridjs.Grid({
+        columns: ["Judul", "Tanggal Rilis", "Direktor", "Produser"],
+        server: {
+          url: "https://swapi.dev/api/films/",
+          then: (data) =>
+            data.results.map((movie) => [
+              movie.title,
+              movie.release_date,
+              movie.director,
+              movie.producer,
+            ]),
+        },
+      }).render(document.getElementById("table-gridjs"));
+    </script>
+  </body>
+</html>
